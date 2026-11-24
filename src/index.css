@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { @apply bg-[#fcf9f8] text-ink font-sans m-0; }
+}
+@layer components {
+  .box { @apply border-[3px] border-ink bg-white rounded-xl shadow-b6; }
+  .btn { @apply border-[3px] border-ink rounded-xl font-mono font-bold uppercase px-4 py-2 shadow-b4 transition-all cursor-pointer
+    active:translate-x-0.5 active:translate-y-0.5 active:shadow-b2 hover:shadow-b6 inline-flex items-center justify-center gap-2; }
+  .tag { @apply border-2 border-ink rounded font-mono font-bold uppercase text-[11px] px-2 py-0.5 inline-block; }
+  .input { @apply w-full border-[3px] border-ink rounded-xl px-4 py-3 font-mono shadow-b4 focus:outline-none focus:bg-sun/20; }
+}
+
+/* Rattie Patty (mascot) */
+@keyframes mascot-hop { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes mascot-breathe { 0%,100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(1px) scaleY(.97); } }
+@keyframes mascot-pop { 0% { transform: scale(.6) translateY(20px); opacity: 0; } 70% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1); } }
+@keyframes mascot-float { 0% { transform: translateY(0) scale(.8); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(-90px) scale(1.2); opacity: 0; } }
+@keyframes mascot-zzz { 0% { transform: translate(0,0); opacity: 0; } 30% { opacity: 1; } 100% { transform: translate(10px,-22px); opacity: 0; } }
+.mascot-hop { animation: mascot-hop .26s ease-in-out infinite; }
+.mascot-breathe { animation: mascot-breathe 2.4s ease-in-out infinite; transform-origin: bottom center; }
+.mascot-pop { animation: mascot-pop .35s ease-out both; }
+.mascot-float { animation: mascot-float 1.8s ease-out forwards; }
+.mascot-zzz { animation: mascot-zzz 2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .mascot-hop, .mascot-breathe, .mascot-zzz { animation: none; } }
+@keyframes mascot-nibble { 0%,100% { transform: translateX(0) rotate(0); } 25% { transform: translateX(1.5px) rotate(-2.5deg); } 75% { transform: translateX(-.5px) rotate(1.5deg); } }
+@keyframes mascot-crumb { 0% { transform: translate(0,0) rotate(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(var(--dx,5px),24px) rotate(200deg); opacity: 0; } }
+.mascot-nibble { animation: mascot-nibble .14s linear infinite; transform-origin: bottom center; }
+.mascot-crumb { animation: mascot-crumb .9s ease-in infinite; }
+@media (prefers-reduced-motion: reduce) { .mascot-nibble, .mascot-crumb { animation: none; } }
+
+/* Rattie's talk panel: a plain white window */
+.mascot-panel { background-color: #fff; }
+
+/* Punishment box */
+@keyframes pb-paper-in {
+  0%   { transform: translate(-135px, 14px) rotate(-35deg) scale(1.1); opacity: 1; }
+  45%  { transform: translate(-32px, -52px) rotate(10deg) scale(1.15); }
+  75%  { transform: translate(0, 22px) rotate(35deg) scale(.95); }
+  100% { transform: translate(2px, 125px) rotate(50deg) scale(.7); opacity: 1; }
+}
+.pb-paper-in { animation: pb-paper-in .95s cubic-bezier(.4, 0, .6, 1) both; }
+@keyframes pb-paper-out {
+  0%   { transform: translate(0, 40px) rotate(0) scale(.7); opacity: 0; }
+  15%  { opacity: 1; }
+  55%  { transform: translate(8px, -78px) rotate(-12deg) scale(1.1); opacity: 1; }
+  90%  { transform: translate(62px, -128px) rotate(18deg) scale(1.35); opacity: 1; }
+  100% { transform: translate(66px, -132px) rotate(20deg) scale(1.4); opacity: 0; }
+}
+.pb-paper-out { animation: pb-paper-out .95s ease-out both; }
+@keyframes pb-burst { 0% { transform: scale(.2); opacity: 0; } 30% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.12); opacity: 0; } }
+.pb-burst { animation: pb-burst .6s ease-out both; transform-origin: 258px 62px; }
+@keyframes pb-thud { 0%, 100% { transform: translateY(0) scaleY(1); } 35% { transform: translateY(5px) scaleY(.975); } 65% { transform: translateY(-2px); } }
+.pb-thud { animation: pb-thud .35s ease-out; transform-origin: 50% 100%; }
+@keyframes note-fold {
+  0%   { transform: rotate(-1deg) scale(1); opacity: 1; }
+  35%  { transform: rotate(-2deg) scaleY(.55); }
+  70%  { transform: rotate(3deg) scale(.5, .38); opacity: 1; }
+  100% { transform: rotate(10deg) translate(55%, -20%) scale(.12); opacity: 0; }
+}
+.note-fold { animation: note-fold .8s ease-in both; }
+@keyframes note-unfold {
+  0%   { transform: perspective(700px) rotateX(75deg) rotate(-8deg) scale(.2); opacity: 0; }
+  55%  { transform: perspective(700px) rotateX(-12deg) rotate(2deg) scale(1.04); opacity: 1; }
+  100% { transform: perspective(700px) rotateX(0) rotate(-1deg) scale(1); opacity: 1; }
+}
+.note-unfold { animation: note-unfold .75s ease-out both; transform-origin: 50% 0%; }
+@media (prefers-reduced-motion: reduce) { .pb-paper-in, .pb-paper-out, .pb-burst, .pb-thud, .note-fold, .note-unfold { animation-duration: .01s; } }

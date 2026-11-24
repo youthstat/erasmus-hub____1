@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // MVP: будь-який авторизований (анонімно) клієнт може читати й писати.
+    // Пароль адміна 1234 перевіряється лише в браузері, тому це НЕ захищає від зловмисника.
+    // Для реального захисту див. README (розділ "Безпека").
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
